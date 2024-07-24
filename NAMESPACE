@@ -3,6 +3,7 @@
 export(igtChoice)
 export(igtLearning)
 export(igtUtility)
+export(simulateIGT)
 import(Rcpp)
 import(methods)
 importFrom(rstan,sampling)

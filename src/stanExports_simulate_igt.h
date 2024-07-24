@@ -27,7 +27,7 @@ namespace model_simulate_igt_namespace {
 using stan::model::model_base_crtp;
 using namespace stan::math;
 stan::math::profile_map profiles__;
-static constexpr std::array<const char*, 118> locations_array__ =
+static constexpr std::array<const char*, 120> locations_array__ =
   {" (found before start of program)",
   " (in 'simulate_igt', line 106, column 2 to column 46)",
   " (in 'simulate_igt', line 107, column 2 to column 48)",
@@ -37,25 +37,26 @@ static constexpr std::array<const char*, 118> locations_array__ =
   " (in 'simulate_igt', line 115, column 4 to column 28)",
   " (in 'simulate_igt', line 116, column 4 to column 30)",
   " (in 'simulate_igt', line 117, column 4 to column 25)",
-  " (in 'simulate_igt', line 118, column 4 to column 28)",
+  " (in 'simulate_igt', line 118, column 4 to column 32)",
   " (in 'simulate_igt', line 119, column 4 to column 15)",
   " (in 'simulate_igt', line 120, column 4 to column 30)",
   " (in 'simulate_igt', line 121, column 4 to column 24)",
-  " (in 'simulate_igt', line 123, column 8 to column 23)",
-  " (in 'simulate_igt', line 124, column 8 to column 20)",
-  " (in 'simulate_igt', line 122, column 26 to line 125, column 5)",
-  " (in 'simulate_igt', line 122, column 4 to line 125, column 5)",
-  " (in 'simulate_igt', line 129, column 8 to column 23)",
-  " (in 'simulate_igt', line 131, column 8 to column 73)",
-  " (in 'simulate_igt', line 133, column 8 to column 37)",
-  " (in 'simulate_igt', line 134, column 8 to column 42)",
-  " (in 'simulate_igt', line 135, column 8 to column 46)",
-  " (in 'simulate_igt', line 137, column 8 to column 51)",
-  " (in 'simulate_igt', line 138, column 8 to column 53)",
-  " (in 'simulate_igt', line 140, column 8 to line 141, column 57)",
-  " (in 'simulate_igt', line 143, column 8 to line 144, column 63)",
-  " (in 'simulate_igt', line 127, column 27 to line 145, column 5)",
-  " (in 'simulate_igt', line 127, column 4 to line 145, column 5)",
+  " (in 'simulate_igt', line 122, column 4 to column 27)",
+  " (in 'simulate_igt', line 124, column 8 to column 23)",
+  " (in 'simulate_igt', line 125, column 8 to column 20)",
+  " (in 'simulate_igt', line 123, column 26 to line 126, column 5)",
+  " (in 'simulate_igt', line 123, column 4 to line 126, column 5)",
+  " (in 'simulate_igt', line 130, column 8 to column 23)",
+  " (in 'simulate_igt', line 132, column 8 to column 73)",
+  " (in 'simulate_igt', line 134, column 8 to column 37)",
+  " (in 'simulate_igt', line 135, column 8 to column 42)",
+  " (in 'simulate_igt', line 136, column 8 to column 46)",
+  " (in 'simulate_igt', line 138, column 8 to column 51)",
+  " (in 'simulate_igt', line 139, column 8 to column 53)",
+  " (in 'simulate_igt', line 141, column 8 to line 142, column 57)",
+  " (in 'simulate_igt', line 144, column 8 to line 145, column 63)",
+  " (in 'simulate_igt', line 128, column 27 to line 146, column 5)",
+  " (in 'simulate_igt', line 128, column 4 to line 146, column 5)",
   " (in 'simulate_igt', line 94, column 2 to column 26)",
   " (in 'simulate_igt', line 95, column 2 to column 25)",
   " (in 'simulate_igt', line 96, column 2 to column 23)",
@@ -80,9 +81,10 @@ static constexpr std::array<const char*, 118> locations_array__ =
   " (in 'simulate_igt', line 115, column 11 to column 21)",
   " (in 'simulate_igt', line 116, column 11 to column 21)",
   " (in 'simulate_igt', line 117, column 11 to column 21)",
-  " (in 'simulate_igt', line 118, column 16 to column 26)",
+  " (in 'simulate_igt', line 118, column 11 to column 20)",
   " (in 'simulate_igt', line 120, column 11 to column 20)",
   " (in 'simulate_igt', line 121, column 13 to column 22)",
+  " (in 'simulate_igt', line 122, column 15 to column 25)",
   " (in 'simulate_igt', line 5, column 4 to column 44)",
   " (in 'simulate_igt', line 4, column 49 to line 6, column 1)",
   " (in 'simulate_igt', line 10, column 4 to column 26)",
@@ -238,7 +240,7 @@ utility_EU(const T0__& win, const T1__& loss, const std::vector<T2__>& par,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 55;
+    current_statement__ = 57;
     return (((1 - stan::model::rvalue(par, "par", stan::model::index_uni(1)))
            * win) -
            (stan::model::rvalue(par, "par", stan::model::index_uni(1)) *
@@ -264,15 +266,15 @@ utility_PU(const T0__& win, const T1__& loss, const std::vector<T2__>& par,
   (void) DUMMY_VAR__;
   try {
     local_scalar_t__ net = DUMMY_VAR__;
-    current_statement__ = 57;
+    current_statement__ = 59;
     net = (win - loss);
-    current_statement__ = 62;
+    current_statement__ = 64;
     if (stan::math::logical_gte(net, 0)) {
-      current_statement__ = 60;
+      current_statement__ = 62;
       return stan::math::pow(net,
                stan::model::rvalue(par, "par", stan::model::index_uni(1)));
     } else {
-      current_statement__ = 58;
+      current_statement__ = 60;
       return (-stan::model::rvalue(par, "par", stan::model::index_uni(2)) *
              stan::math::pow(stan::math::fabs(net),
                stan::model::rvalue(par, "par", stan::model::index_uni(1))));
@@ -297,7 +299,7 @@ utility_PU2(const T0__& win, const T1__& loss, const std::vector<T2__>& par,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 64;
+    current_statement__ = 66;
     return (stan::math::pow(win,
               stan::model::rvalue(par, "par", stan::model::index_uni(1)))
            - (stan::model::rvalue(par, "par", stan::model::index_uni(2)) *
@@ -326,22 +328,22 @@ updating_DRL(const T0__& V_arg__, const T1__& u, const int& sel,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 66;
+    current_statement__ = 68;
     stan::math::validate_non_negative_index("V_new", "num_elements(V)",
       stan::math::num_elements(V));
     Eigen::Matrix<local_scalar_t__,-1,1> V_new =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(stan::math::num_elements(
                                                        V), DUMMY_VAR__);
-    current_statement__ = 67;
+    current_statement__ = 69;
     stan::model::assign(V_new,
       stan::math::multiply(
         stan::model::rvalue(par, "par", stan::model::index_uni(1)), V),
       "assigning variable V_new");
-    current_statement__ = 68;
+    current_statement__ = 70;
     stan::model::assign(V_new,
       (stan::model::rvalue(V_new, "V_new", stan::model::index_uni(sel)) + u),
       "assigning variable V_new", stan::model::index_uni(sel));
-    current_statement__ = 69;
+    current_statement__ = 71;
     return V_new;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -366,21 +368,21 @@ updating_DEL(const T0__& V_arg__, const T1__& u, const int& sel,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 71;
+    current_statement__ = 73;
     stan::math::validate_non_negative_index("V_new", "num_elements(V)",
       stan::math::num_elements(V));
     Eigen::Matrix<local_scalar_t__,-1,1> V_new =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(stan::math::num_elements(
                                                        V), DUMMY_VAR__);
-    current_statement__ = 72;
+    current_statement__ = 74;
     stan::model::assign(V_new, V, "assigning variable V_new");
-    current_statement__ = 73;
+    current_statement__ = 75;
     stan::model::assign(V_new,
       (stan::model::rvalue(V_new, "V_new", stan::model::index_uni(sel)) +
       (stan::model::rvalue(par, "par", stan::model::index_uni(1)) * (u -
       stan::model::rvalue(V_new, "V_new", stan::model::index_uni(sel))))),
       "assigning variable V_new", stan::model::index_uni(sel));
-    current_statement__ = 74;
+    current_statement__ = 76;
     return V_new;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -405,24 +407,24 @@ updating_ML(const T0__& V_arg__, const T1__& u, const int& sel,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 76;
+    current_statement__ = 78;
     stan::math::validate_non_negative_index("V_new", "num_elements(V)",
       stan::math::num_elements(V));
     Eigen::Matrix<local_scalar_t__,-1,1> V_new =
       Eigen::Matrix<local_scalar_t__,-1,1>::Constant(stan::math::num_elements(
                                                        V), DUMMY_VAR__);
-    current_statement__ = 77;
+    current_statement__ = 79;
     stan::model::assign(V_new,
       stan::math::multiply((1 -
         stan::model::rvalue(par, "par", stan::model::index_uni(1))), V),
       "assigning variable V_new");
-    current_statement__ = 78;
+    current_statement__ = 80;
     stan::model::assign(V_new,
       (stan::model::rvalue(par, "par", stan::model::index_uni(2)) * (u - ((1
       - stan::model::rvalue(par, "par", stan::model::index_uni(1))) *
       stan::model::rvalue(V, "V", stan::model::index_uni(sel))))),
       "assigning variable V_new", stan::model::index_uni(sel));
-    current_statement__ = 79;
+    current_statement__ = 81;
     return V_new;
   } catch (const std::exception& e) {
     stan::lang::rethrow_located(e, locations_array__[current_statement__]);
@@ -441,7 +443,7 @@ temperature_TDC(const int& t, const std::vector<T1__>& par, std::ostream*
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 81;
+    current_statement__ = 83;
     return stan::math::pow((t / 10.0),
              stan::model::rvalue(par, "par", stan::model::index_uni(1)));
   } catch (const std::exception& e) {
@@ -461,7 +463,7 @@ temperature_TIC(const int& t, const std::vector<T1__>& par, std::ostream*
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 83;
+    current_statement__ = 85;
     return (stan::math::pow(3.0,
               stan::model::rvalue(par, "par", stan::model::index_uni(1)))
            - 1);
@@ -485,22 +487,22 @@ utility(const T0__& win, const T1__& loss, const std::vector<T2__>& par,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 95;
+    current_statement__ = 97;
     if (stan::math::logical_eq(ind, 1)) {
-      current_statement__ = 93;
+      current_statement__ = 95;
       return utility_EU(win, loss, par, pstream__);
     } else {
-      current_statement__ = 92;
+      current_statement__ = 94;
       if (stan::math::logical_eq(ind, 2)) {
-        current_statement__ = 90;
+        current_statement__ = 92;
         return utility_PU(win, loss, par, pstream__);
       } else {
-        current_statement__ = 89;
+        current_statement__ = 91;
         if (stan::math::logical_eq(ind, 3)) {
-          current_statement__ = 87;
+          current_statement__ = 89;
           return utility_PU2(win, loss, par, pstream__);
         } else {
-          current_statement__ = 85;
+          current_statement__ = 87;
           return 0;
         }
       }
@@ -529,22 +531,22 @@ updating(const T0__& V_arg__, const T1__& u, const int& sel,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 107;
+    current_statement__ = 109;
     if (stan::math::logical_eq(ind, 1)) {
-      current_statement__ = 105;
+      current_statement__ = 107;
       return updating_DRL(V, u, sel, par, pstream__);
     } else {
-      current_statement__ = 104;
+      current_statement__ = 106;
       if (stan::math::logical_eq(ind, 2)) {
-        current_statement__ = 102;
+        current_statement__ = 104;
         return updating_DEL(V, u, sel, par, pstream__);
       } else {
-        current_statement__ = 101;
+        current_statement__ = 103;
         if (stan::math::logical_eq(ind, 3)) {
-          current_statement__ = 99;
+          current_statement__ = 101;
           return updating_ML(V, u, sel, par, pstream__);
         } else {
-          current_statement__ = 97;
+          current_statement__ = 99;
           return V;
         }
       }
@@ -566,17 +568,17 @@ temperature(const int& t, const std::vector<T1__>& par, const int& ind,
   // suppress unused var warning
   (void) DUMMY_VAR__;
   try {
-    current_statement__ = 116;
+    current_statement__ = 118;
     if (stan::math::logical_eq(ind, 1)) {
-      current_statement__ = 114;
+      current_statement__ = 116;
       return temperature_TDC(t, par, pstream__);
     } else {
-      current_statement__ = 113;
+      current_statement__ = 115;
       if (stan::math::logical_eq(ind, 2)) {
-        current_statement__ = 111;
+        current_statement__ = 113;
         return temperature_TIC(t, par, pstream__);
       } else {
-        current_statement__ = 109;
+        current_statement__ = 111;
         return 1;
       }
     }
@@ -618,78 +620,78 @@ public:
     try {
       int pos__ = std::numeric_limits<int>::min();
       pos__ = 1;
-      current_statement__ = 28;
+      current_statement__ = 29;
       context__.validate_dims("data initialization", "NUM_TRIALS", "int",
         std::vector<size_t>{});
       NUM_TRIALS = std::numeric_limits<int>::min();
-      current_statement__ = 28;
+      current_statement__ = 29;
       NUM_TRIALS = context__.vals_i("NUM_TRIALS")[(1 - 1)];
-      current_statement__ = 28;
+      current_statement__ = 29;
       stan::math::check_greater_or_equal(function__, "NUM_TRIALS",
         NUM_TRIALS, 0);
-      current_statement__ = 29;
+      current_statement__ = 30;
       context__.validate_dims("data initialization", "NUM_DECKS", "int",
         std::vector<size_t>{});
       NUM_DECKS = std::numeric_limits<int>::min();
-      current_statement__ = 29;
+      current_statement__ = 30;
       NUM_DECKS = context__.vals_i("NUM_DECKS")[(1 - 1)];
-      current_statement__ = 29;
+      current_statement__ = 30;
       stan::math::check_greater_or_equal(function__, "NUM_DECKS", NUM_DECKS,
         0);
-      current_statement__ = 30;
+      current_statement__ = 31;
       context__.validate_dims("data initialization", "UTILITY_FUNCTION",
         "int", std::vector<size_t>{});
       UTILITY_FUNCTION = std::numeric_limits<int>::min();
-      current_statement__ = 30;
-      UTILITY_FUNCTION = context__.vals_i("UTILITY_FUNCTION")[(1 - 1)];
       current_statement__ = 31;
+      UTILITY_FUNCTION = context__.vals_i("UTILITY_FUNCTION")[(1 - 1)];
+      current_statement__ = 32;
       context__.validate_dims("data initialization", "UPDATING_FUNCTION",
         "int", std::vector<size_t>{});
       UPDATING_FUNCTION = std::numeric_limits<int>::min();
-      current_statement__ = 31;
-      UPDATING_FUNCTION = context__.vals_i("UPDATING_FUNCTION")[(1 - 1)];
       current_statement__ = 32;
+      UPDATING_FUNCTION = context__.vals_i("UPDATING_FUNCTION")[(1 - 1)];
+      current_statement__ = 33;
       context__.validate_dims("data initialization", "TEMPERATURE_FUNCTION",
         "int", std::vector<size_t>{});
       TEMPERATURE_FUNCTION = std::numeric_limits<int>::min();
-      current_statement__ = 32;
+      current_statement__ = 33;
       TEMPERATURE_FUNCTION = context__.vals_i("TEMPERATURE_FUNCTION")[(1 -
         1)];
-      current_statement__ = 33;
+      current_statement__ = 34;
       context__.validate_dims("data initialization",
         "NUM_UTILITY_PARAMETERS", "int", std::vector<size_t>{});
       NUM_UTILITY_PARAMETERS = std::numeric_limits<int>::min();
-      current_statement__ = 33;
+      current_statement__ = 34;
       NUM_UTILITY_PARAMETERS = context__.vals_i("NUM_UTILITY_PARAMETERS")[(1
         - 1)];
-      current_statement__ = 33;
+      current_statement__ = 34;
       stan::math::check_greater_or_equal(function__,
         "NUM_UTILITY_PARAMETERS", NUM_UTILITY_PARAMETERS, 0);
-      current_statement__ = 34;
+      current_statement__ = 35;
       context__.validate_dims("data initialization",
         "NUM_UPDATING_PARAMETERS", "int", std::vector<size_t>{});
       NUM_UPDATING_PARAMETERS = std::numeric_limits<int>::min();
-      current_statement__ = 34;
+      current_statement__ = 35;
       NUM_UPDATING_PARAMETERS = context__.vals_i("NUM_UPDATING_PARAMETERS")[(1
         - 1)];
-      current_statement__ = 34;
+      current_statement__ = 35;
       stan::math::check_greater_or_equal(function__,
         "NUM_UPDATING_PARAMETERS", NUM_UPDATING_PARAMETERS, 0);
-      current_statement__ = 35;
+      current_statement__ = 36;
       context__.validate_dims("data initialization",
         "NUM_TEMPERATURE_PARAMETERS", "int", std::vector<size_t>{});
       NUM_TEMPERATURE_PARAMETERS = std::numeric_limits<int>::min();
-      current_statement__ = 35;
+      current_statement__ = 36;
       NUM_TEMPERATURE_PARAMETERS = context__.vals_i("NUM_TEMPERATURE_PARAMETERS")[(1
         - 1)];
-      current_statement__ = 35;
+      current_statement__ = 36;
       stan::math::check_greater_or_equal(function__,
         "NUM_TEMPERATURE_PARAMETERS", NUM_TEMPERATURE_PARAMETERS, 0);
-      current_statement__ = 36;
-      stan::math::validate_non_negative_index("win", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 37;
-      stan::math::validate_non_negative_index("win", "NUM_DECKS", NUM_DECKS);
+      stan::math::validate_non_negative_index("win", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 38;
+      stan::math::validate_non_negative_index("win", "NUM_DECKS", NUM_DECKS);
+      current_statement__ = 39;
       context__.validate_dims("data initialization", "win", "double",
         std::vector<size_t>{static_cast<size_t>(NUM_TRIALS),
           static_cast<size_t>(NUM_DECKS)});
@@ -698,29 +700,29 @@ public:
                 std::numeric_limits<double>::quiet_NaN()));
       {
         std::vector<local_scalar_t__> win_flat__;
-        current_statement__ = 38;
+        current_statement__ = 39;
         win_flat__ = context__.vals_r("win");
-        current_statement__ = 38;
+        current_statement__ = 39;
         pos__ = 1;
-        current_statement__ = 38;
+        current_statement__ = 39;
         for (int sym1__ = 1; sym1__ <= NUM_DECKS; ++sym1__) {
-          current_statement__ = 38;
+          current_statement__ = 39;
           for (int sym2__ = 1; sym2__ <= NUM_TRIALS; ++sym2__) {
-            current_statement__ = 38;
+            current_statement__ = 39;
             stan::model::assign(win, win_flat__[(pos__ - 1)],
               "assigning variable win", stan::model::index_uni(sym2__),
               stan::model::index_uni(sym1__));
-            current_statement__ = 38;
+            current_statement__ = 39;
             pos__ = (pos__ + 1);
           }
         }
       }
-      current_statement__ = 39;
+      current_statement__ = 40;
       stan::math::validate_non_negative_index("loss", "NUM_TRIALS",
         NUM_TRIALS);
-      current_statement__ = 40;
-      stan::math::validate_non_negative_index("loss", "NUM_DECKS", NUM_DECKS);
       current_statement__ = 41;
+      stan::math::validate_non_negative_index("loss", "NUM_DECKS", NUM_DECKS);
+      current_statement__ = 42;
       context__.validate_dims("data initialization", "loss", "double",
         std::vector<size_t>{static_cast<size_t>(NUM_TRIALS),
           static_cast<size_t>(NUM_DECKS)});
@@ -729,56 +731,59 @@ public:
                  std::numeric_limits<double>::quiet_NaN()));
       {
         std::vector<local_scalar_t__> loss_flat__;
-        current_statement__ = 41;
+        current_statement__ = 42;
         loss_flat__ = context__.vals_r("loss");
-        current_statement__ = 41;
+        current_statement__ = 42;
         pos__ = 1;
-        current_statement__ = 41;
+        current_statement__ = 42;
         for (int sym1__ = 1; sym1__ <= NUM_DECKS; ++sym1__) {
-          current_statement__ = 41;
+          current_statement__ = 42;
           for (int sym2__ = 1; sym2__ <= NUM_TRIALS; ++sym2__) {
-            current_statement__ = 41;
+            current_statement__ = 42;
             stan::model::assign(loss, loss_flat__[(pos__ - 1)],
               "assigning variable loss", stan::model::index_uni(sym2__),
               stan::model::index_uni(sym1__));
-            current_statement__ = 41;
+            current_statement__ = 42;
             pos__ = (pos__ + 1);
           }
         }
       }
-      current_statement__ = 42;
+      current_statement__ = 43;
       stan::math::validate_non_negative_index("utility_params",
         "NUM_UTILITY_PARAMETERS", NUM_UTILITY_PARAMETERS);
-      current_statement__ = 43;
+      current_statement__ = 44;
       stan::math::validate_non_negative_index("updating_params",
         "NUM_UPDATING_PARAMETERS", NUM_UPDATING_PARAMETERS);
-      current_statement__ = 44;
+      current_statement__ = 45;
       stan::math::validate_non_negative_index("temperature_params",
         "NUM_TEMPERATURE_PARAMETERS", NUM_TEMPERATURE_PARAMETERS);
-      current_statement__ = 45;
-      stan::math::validate_non_negative_index("V", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 46;
-      stan::math::validate_non_negative_index("V", "NUM_DECKS", NUM_DECKS);
+      stan::math::validate_non_negative_index("V", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 47;
-      stan::math::validate_non_negative_index("P", "NUM_TRIALS", NUM_TRIALS);
+      stan::math::validate_non_negative_index("V", "NUM_DECKS", NUM_DECKS);
       current_statement__ = 48;
-      stan::math::validate_non_negative_index("P", "NUM_DECKS", NUM_DECKS);
+      stan::math::validate_non_negative_index("P", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 49;
+      stan::math::validate_non_negative_index("P", "NUM_DECKS", NUM_DECKS);
+      current_statement__ = 50;
       stan::math::validate_non_negative_index("wins", "NUM_TRIALS",
         NUM_TRIALS);
-      current_statement__ = 50;
+      current_statement__ = 51;
       stan::math::validate_non_negative_index("losses", "NUM_TRIALS",
         NUM_TRIALS);
-      current_statement__ = 51;
-      stan::math::validate_non_negative_index("U", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 52;
-      stan::math::validate_non_negative_index("choice", "NUM_TRIALS",
-        NUM_TRIALS);
+      stan::math::validate_non_negative_index("U", "NUM_TRIALS", NUM_TRIALS);
       current_statement__ = 53;
-      stan::math::validate_non_negative_index("V_dummy", "NUM_DECKS",
+      stan::math::validate_non_negative_index("n_choices", "NUM_DECKS",
         NUM_DECKS);
       current_statement__ = 54;
+      stan::math::validate_non_negative_index("V_dummy", "NUM_DECKS",
+        NUM_DECKS);
+      current_statement__ = 55;
       stan::math::validate_non_negative_index("card", "NUM_DECKS", NUM_DECKS);
+      current_statement__ = 56;
+      stan::math::validate_non_negative_index("choice", "NUM_TRIALS",
+        NUM_TRIALS);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
     }
@@ -911,44 +916,47 @@ public:
       Eigen::Matrix<double,-1,1> U =
         Eigen::Matrix<double,-1,1>::Constant(NUM_TRIALS,
           std::numeric_limits<double>::quiet_NaN());
-      std::vector<int> choice =
-        std::vector<int>(NUM_TRIALS, std::numeric_limits<int>::min());
+      Eigen::Matrix<double,-1,1> n_choices =
+        Eigen::Matrix<double,-1,1>::Constant(NUM_DECKS,
+          std::numeric_limits<double>::quiet_NaN());
       double theta = std::numeric_limits<double>::quiet_NaN();
       Eigen::Matrix<double,-1,1> V_dummy =
         Eigen::Matrix<double,-1,1>::Constant(NUM_DECKS,
           std::numeric_limits<double>::quiet_NaN());
       std::vector<int> card =
         std::vector<int>(NUM_DECKS, std::numeric_limits<int>::min());
-      current_statement__ = 16;
+      std::vector<int> choice =
+        std::vector<int>(NUM_TRIALS, std::numeric_limits<int>::min());
+      current_statement__ = 17;
       for (int d = 1; d <= NUM_DECKS; ++d) {
-        current_statement__ = 13;
+        current_statement__ = 14;
         stan::model::assign(V_dummy, 0, "assigning variable V_dummy",
           stan::model::index_uni(d));
-        current_statement__ = 14;
+        current_statement__ = 15;
         stan::model::assign(card, 0, "assigning variable card",
           stan::model::index_uni(d));
       }
-      current_statement__ = 27;
+      current_statement__ = 28;
       for (int t = 1; t <= NUM_TRIALS; ++t) {
-        current_statement__ = 17;
+        current_statement__ = 18;
         stan::model::assign(V, V_dummy, "assigning variable V",
           stan::model::index_uni(t));
-        current_statement__ = 18;
+        current_statement__ = 19;
         theta = temperature(t, temperature_params, TEMPERATURE_FUNCTION,
                   pstream__);
-        current_statement__ = 19;
+        current_statement__ = 20;
         stan::model::assign(P,
           stan::math::softmax(
             stan::math::multiply(theta,
               stan::model::rvalue(V, "V", stan::model::index_uni(t)))),
           "assigning variable P", stan::model::index_uni(t));
-        current_statement__ = 20;
+        current_statement__ = 21;
         stan::model::assign(choice,
           stan::math::categorical_rng(
             stan::model::rvalue(P, "P", stan::model::index_uni(t)),
             base_rng__), "assigning variable choice",
           stan::model::index_uni(t));
-        current_statement__ = 21;
+        current_statement__ = 22;
         stan::model::assign(card,
           (stan::model::rvalue(card, "card",
              stan::model::index_uni(
@@ -957,7 +965,7 @@ public:
           "assigning variable card",
           stan::model::index_uni(
             stan::model::rvalue(choice, "choice", stan::model::index_uni(t))));
-        current_statement__ = 22;
+        current_statement__ = 23;
         stan::model::assign(wins,
           stan::model::rvalue(win, "win",
             stan::model::index_uni(
@@ -968,7 +976,7 @@ public:
             stan::model::index_uni(
               stan::model::rvalue(choice, "choice", stan::model::index_uni(t)))),
           "assigning variable wins", stan::model::index_uni(t));
-        current_statement__ = 23;
+        current_statement__ = 24;
         stan::model::assign(losses,
           stan::model::rvalue(loss, "loss",
             stan::model::index_uni(
@@ -979,14 +987,14 @@ public:
             stan::model::index_uni(
               stan::model::rvalue(choice, "choice", stan::model::index_uni(t)))),
           "assigning variable losses", stan::model::index_uni(t));
-        current_statement__ = 24;
+        current_statement__ = 25;
         stan::model::assign(U,
           utility(
             stan::model::rvalue(wins, "wins", stan::model::index_uni(t)),
             stan::model::rvalue(losses, "losses", stan::model::index_uni(t)),
             utility_params, UTILITY_FUNCTION, pstream__),
           "assigning variable U", stan::model::index_uni(t));
-        current_statement__ = 25;
+        current_statement__ = 26;
         stan::model::assign(V_dummy,
           updating(stan::model::deep_copy(V_dummy),
             stan::model::rvalue(U, "U", stan::model::index_uni(t)),
@@ -1009,10 +1017,11 @@ public:
       out__.write(wins);
       out__.write(losses);
       out__.write(U);
-      out__.write(choice);
+      out__.write(n_choices);
       out__.write(theta);
       out__.write(V_dummy);
       out__.write(card);
+      out__.write(choice);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
     }
@@ -1113,8 +1122,8 @@ public:
     if (emit_transformed_parameters__) {}
     if (emit_generated_quantities__) {
       std::vector<std::string>
-        temp{"V", "P", "wins", "losses", "U", "choice", "theta", "V_dummy",
-             "card"};
+        temp{"V", "P", "wins", "losses", "U", "n_choices", "theta",
+             "V_dummy", "card", "choice"};
       names__.reserve(names__.size() + temp.size());
       names__.insert(names__.end(), temp.begin(), temp.end());
     }
@@ -1140,10 +1149,11 @@ public:
              std::vector<size_t>{static_cast<size_t>(NUM_TRIALS)},
              std::vector<size_t>{static_cast<size_t>(NUM_TRIALS)},
              std::vector<size_t>{static_cast<size_t>(NUM_TRIALS)},
-             std::vector<size_t>{static_cast<size_t>(NUM_TRIALS)},
+             std::vector<size_t>{static_cast<size_t>(NUM_DECKS)},
              std::vector<size_t>{},
              std::vector<size_t>{static_cast<size_t>(NUM_DECKS)},
-             std::vector<size_t>{static_cast<size_t>(NUM_DECKS)}};
+             std::vector<size_t>{static_cast<size_t>(NUM_DECKS)},
+             std::vector<size_t>{static_cast<size_t>(NUM_TRIALS)}};
       dimss__.reserve(dimss__.size() + temp.size());
       dimss__.insert(dimss__.end(), temp.begin(), temp.end());
     }
@@ -1190,8 +1200,8 @@ public:
         param_names__.emplace_back(std::string() + "U" + '.' +
           std::to_string(sym1__));
       }
-      for (int sym1__ = 1; sym1__ <= NUM_TRIALS; ++sym1__) {
-        param_names__.emplace_back(std::string() + "choice" + '.' +
+      for (int sym1__ = 1; sym1__ <= NUM_DECKS; ++sym1__) {
+        param_names__.emplace_back(std::string() + "n_choices" + '.' +
           std::to_string(sym1__));
       }
       param_names__.emplace_back(std::string() + "theta");
@@ -1201,6 +1211,10 @@ public:
       }
       for (int sym1__ = 1; sym1__ <= NUM_DECKS; ++sym1__) {
         param_names__.emplace_back(std::string() + "card" + '.' +
+          std::to_string(sym1__));
+      }
+      for (int sym1__ = 1; sym1__ <= NUM_TRIALS; ++sym1__) {
+        param_names__.emplace_back(std::string() + "choice" + '.' +
           std::to_string(sym1__));
       }
     }
@@ -1247,8 +1261,8 @@ public:
         param_names__.emplace_back(std::string() + "U" + '.' +
           std::to_string(sym1__));
       }
-      for (int sym1__ = 1; sym1__ <= NUM_TRIALS; ++sym1__) {
-        param_names__.emplace_back(std::string() + "choice" + '.' +
+      for (int sym1__ = 1; sym1__ <= NUM_DECKS; ++sym1__) {
+        param_names__.emplace_back(std::string() + "n_choices" + '.' +
           std::to_string(sym1__));
       }
       param_names__.emplace_back(std::string() + "theta");
@@ -1260,13 +1274,17 @@ public:
         param_names__.emplace_back(std::string() + "card" + '.' +
           std::to_string(sym1__));
       }
+      for (int sym1__ = 1; sym1__ <= NUM_TRIALS; ++sym1__) {
+        param_names__.emplace_back(std::string() + "choice" + '.' +
+          std::to_string(sym1__));
+      }
     }
   }
   inline std::string get_constrained_sizedtypes() const {
-    return std::string("[{\"name\":\"utility_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UTILITY_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"updating_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UPDATING_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"temperature_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TEMPERATURE_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"V\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"P\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"wins\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"losses\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"U\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"choice\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"},{\"name\":\"theta\",\"type\":{\"name\":\"real\"},\"block\":\"generated_quantities\"},{\"name\":\"V_dummy\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"card\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_DECKS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"}]");
+    return std::string("[{\"name\":\"utility_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UTILITY_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"updating_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UPDATING_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"temperature_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TEMPERATURE_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"V\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"P\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"wins\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"losses\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"U\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"n_choices\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"theta\",\"type\":{\"name\":\"real\"},\"block\":\"generated_quantities\"},{\"name\":\"V_dummy\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"card\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_DECKS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"},{\"name\":\"choice\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"}]");
   }
   inline std::string get_unconstrained_sizedtypes() const {
-    return std::string("[{\"name\":\"utility_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UTILITY_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"updating_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UPDATING_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"temperature_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TEMPERATURE_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"V\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"P\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string((NUM_DECKS -1)) + "}},\"block\":\"generated_quantities\"},{\"name\":\"wins\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"losses\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"U\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"choice\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"},{\"name\":\"theta\",\"type\":{\"name\":\"real\"},\"block\":\"generated_quantities\"},{\"name\":\"V_dummy\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"card\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_DECKS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"}]");
+    return std::string("[{\"name\":\"utility_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UTILITY_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"updating_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_UPDATING_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"temperature_params\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TEMPERATURE_PARAMETERS) + ",\"element_type\":{\"name\":\"real\"}},\"block\":\"parameters\"},{\"name\":\"V\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "}},\"block\":\"generated_quantities\"},{\"name\":\"P\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"vector\",\"length\":" + std::to_string((NUM_DECKS -1)) + "}},\"block\":\"generated_quantities\"},{\"name\":\"wins\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"losses\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"U\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_TRIALS) + "},\"block\":\"generated_quantities\"},{\"name\":\"n_choices\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"theta\",\"type\":{\"name\":\"real\"},\"block\":\"generated_quantities\"},{\"name\":\"V_dummy\",\"type\":{\"name\":\"vector\",\"length\":" + std::to_string(NUM_DECKS) + "},\"block\":\"generated_quantities\"},{\"name\":\"card\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_DECKS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"},{\"name\":\"choice\",\"type\":{\"name\":\"array\",\"length\":" + std::to_string(NUM_TRIALS) + ",\"element_type\":{\"name\":\"int\"}},\"block\":\"generated_quantities\"}]");
   }
   // Begin method overload boilerplate
   template <typename RNG> inline void
@@ -1279,9 +1297,9 @@ public:
       NUM_UPDATING_PARAMETERS) + NUM_TEMPERATURE_PARAMETERS);
     const size_t num_transformed = emit_transformed_parameters * (0);
     const size_t num_gen_quantities = emit_generated_quantities *
-      ((((((((((NUM_TRIALS * NUM_DECKS) + (NUM_TRIALS * NUM_DECKS)) +
-      NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + 1) + NUM_DECKS)
-      + NUM_DECKS));
+      (((((((((((NUM_TRIALS * NUM_DECKS) + (NUM_TRIALS * NUM_DECKS)) +
+      NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + NUM_DECKS) + 1) + NUM_DECKS)
+      + NUM_DECKS) + NUM_TRIALS));
     const size_t num_to_write = num_params__ + num_transformed +
       num_gen_quantities;
     std::vector<int> params_i;
@@ -1300,9 +1318,9 @@ public:
       NUM_UPDATING_PARAMETERS) + NUM_TEMPERATURE_PARAMETERS);
     const size_t num_transformed = emit_transformed_parameters * (0);
     const size_t num_gen_quantities = emit_generated_quantities *
-      ((((((((((NUM_TRIALS * NUM_DECKS) + (NUM_TRIALS * NUM_DECKS)) +
-      NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + 1) + NUM_DECKS)
-      + NUM_DECKS));
+      (((((((((((NUM_TRIALS * NUM_DECKS) + (NUM_TRIALS * NUM_DECKS)) +
+      NUM_TRIALS) + NUM_TRIALS) + NUM_TRIALS) + NUM_DECKS) + 1) + NUM_DECKS)
+      + NUM_DECKS) + NUM_TRIALS));
     const size_t num_to_write = num_params__ + num_transformed +
       num_gen_quantities;
     vars = std::vector<double>(num_to_write,

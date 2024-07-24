@@ -39,10 +39,11 @@ generated quantities {
     vector[NUM_TRIALS] wins;
     vector[NUM_TRIALS] losses;
     vector[NUM_TRIALS] U;
-    int  choice[NUM_TRIALS];
+    vector[NUM_DECKS] n_choices;
     real theta;
     vector[NUM_DECKS] V_dummy;
     int card[NUM_DECKS];
+    int choice[NUM_TRIALS];
     for (d in 1:NUM_DECKS){
         V_dummy[d] = 0;
         card[d] = 0;
