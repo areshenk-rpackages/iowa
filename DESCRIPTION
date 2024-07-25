@@ -21,7 +21,7 @@ Suggests: knitr,
     rmarkdown
 RoxygenNote: 7.3.2
 Biarch: true
-Depends: R (>= 3.4.0), R6
+Depends: R (>= 3.4.0)
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),

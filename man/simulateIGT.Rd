@@ -2,10 +2,10 @@
 % Please edit documentation in R/simulateIGT.R
 \name{simulateIGT}
 \alias{simulateIGT}
-\title{Simulate performance of IGT model}
+\title{Simulate performance of an IGT model}
 \usage{
 simulateIGT(
-  deck,
+  deck = "bechara",
   n,
   utility,
   updating,
@@ -16,19 +16,27 @@ simulateIGT(
 )
 }
 \arguments{
-\item{utility}{Name of utility function}
+\item{deck}{Either the name of an included deck or a named list
+with matrices entries "win" and "loss".}
+
+\item{n}{Number of subjects to simulate}
 
 \item{updating}{Name of updating function}
 
 \item{temperature}{Name of temperature function}
 
 \item{pars}{A named list of parameters. See details.}
+
+\item{scale}{How to scale outcomes before passing to the model. Typically, outcomes
+are divided by 100 (i.e. scale = .01).}
+
+\item{fullOutput}{Whether to output internal state variables (i.e. deck valuations)}
 }
 \value{
 Nothing. Generates an error message in the event of incorrect input.
 }
 \description{
-Internal function. Verify that simulation parameters are correct, and correspond to implemented models.
+Simulate IGT performance using a specified model.
 }
 \details{
 Argument "pars" is a named list with fields:
@@ -38,4 +46,8 @@ Argument "pars" is a named list with fields:
  \item{"updating": }{See above.}
  \item{"temperature": }{See above.}
 }
+}
+\seealso{
+[importDeck()] for available deck structures, and more information
+about the structure of a deck object
 }

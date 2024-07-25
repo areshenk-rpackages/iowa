@@ -18,33 +18,33 @@
 verifySimulationParameters <- function(utility, updating, temperature, pars){
 
     # Verify model functions
-    if (!utility %in% names(modelComponentDetails$utility)){
+    if (!utility %in% names(modelDetails$utility)){
         stop('Unrecognized utility function')
-    } else if (!updating %in% names(modelComponentDetails$updating)){
+    } else if (!updating %in% names(modelDetails$updating)){
         stop('Unrecognized updating function')
-    } else if (!temperature %in% names(modelComponentDetails$temperature)){
+    } else if (!temperature %in% names(modelDetails$temperature)){
         stop('Unrecognized temperature function')
     }
 
     # Get number of parameters
-    nparam_utility <- modelComponentDetails$utility[[utility]]$num_params
-    nparam_updating <- modelComponentDetails$updating[[updating]]$num_params
-    nparam_temperature <- modelComponentDetails$temperature[[temperature]]$num_params
+    nparam_utility <- length(modelDetails$utility[[utility]])
+    nparam_updating <- modelDetails$updating[[updating]]$num_params
+    nparam_temperature <- modelDetails$temperature[[temperature]]$num_params
 
     # Get parameter names
-    names_utility     <- modelComponentDetails$utility[[utility]]$par_names
-    names_updating    <- modelComponentDetails$updating[[updating]]$par_names
-    names_temperature <- modelComponentDetails$temperature[[temperature]]$par_names
+    names_utility     <- modelDetails$utility[[utility]]$par_names
+    names_updating    <- modelDetails$updating[[updating]]$par_names
+    names_temperature <- modelDetails$temperature[[temperature]]$par_names
 
     # Get bounds
-    lbound_utility <- modelComponentDetails$utility[[utility]]$lower
-    ubound_utility <- modelComponentDetails$utility[[utility]]$upper
+    lbound_utility <- modelDetails$utility[[utility]]$lower
+    ubound_utility <- modelDetails$utility[[utility]]$upper
 
-    lbound_updating <- modelComponentDetails$updating[[updating]]$lower
-    ubound_updating <- modelComponentDetails$updating[[updating]]$upper
+    lbound_updating <- modelDetails$updating[[updating]]$lower
+    ubound_updating <- modelDetails$updating[[updating]]$upper
 
-    lbound_temperature <- modelComponentDetails$temperature[[temperature]]$lower
-    ubound_temperature <- modelComponentDetails$temperature[[temperature]]$upper
+    lbound_temperature <- modelDetails$temperature[[temperature]]$lower
+    ubound_temperature <- modelDetails$temperature[[temperature]]$upper
 
     # Verify number of parameters
     if (length(pars$utility) != nparam_utility){

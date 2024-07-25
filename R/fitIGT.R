@@ -1,6 +1,6 @@
-#' Simulate performance of an IGT model
+#' Fit model to IGT data
 #'
-#' Simulate IGT performance using a specified model.
+#' Fit model to IGT data either by MLE/MAP, or full posterior sampling
 #'
 #' @param deck Either the name of an included deck or a named list
 #' with matrices entries "win" and "loss".
@@ -25,22 +25,13 @@
 #' @importFrom rstan sampling extract
 #' @export
 
-simulateIGT <- function(deck = 'bechara', n, utility, updating,
-                        temperature, pars, scale = .01,
-                        fullOutput = FALSE) {
+fitIGT <- function(choice, win, loss = NULL, numDecks,
+                   utility, updating, temperature,
+                   pars, scale = .01) {
 
-    if (is.character(deck))
-        deck <- importDeck(deck)
-
-    # Output
-    if (fullOutput){
-        returnPars <- c('choice', 'wins', 'losses', 'V', 'P', 'U')
-    } else {
-        returnPars <- c('choice', 'wins', 'losses')
-    }
 
     # Verify pars
-    verifySimulationParameters(utility, updating, temperature, pars)
+    # verifySimulationParameters(utility, updating, temperature, pars)
 
     # Create Stan data object
     stanData <- createStanDataForSimulation(object, utility, updating, temperature, pars, scale)
