@@ -1,11 +1,16 @@
-#' Simulate performance of IGT model
+#' Simulate performance of an IGT model
 #'
-#' Internal function. Verify that simulation parameters are correct, and correspond to implemented models.
+#' Simulate IGT performance using a specified model.
 #'
-#' @param utility Name of utility function
+#' @param deck Either the name of an included deck or a named list
+#' with matrices entries "win" and "loss".
+#' @param n Number of subjects to simulate
 #' @param updating Name of updating function
 #' @param temperature Name of temperature function
 #' @param pars A named list of parameters. See details.
+#' @param scale How to scale outcomes before passing to the model. Typically, outcomes
+#' are divided by 100 (i.e. scale = .01).
+#' @param fullOutput Whether to output internal state variables (i.e. deck valuations)
 #' @details Argument "pars" is a named list with fields:
 #' \itemize{
 #'  \item{"utility": }{A named list of parameter values. Names must correspond to
@@ -13,17 +18,18 @@
 #'  \item{"updating": }{See above.}
 #'  \item{"temperature": }{See above.}
 #' }
+#'
+#' @seealso [importDeck()] for available deck structures, and more information
+#' about the structure of a deck object
 #' @return Nothing. Generates an error message in the event of incorrect input.
 #' @export
 
-simulateIGT <- function(deck, n, utility, updating,
+simulateIGT <- function(deck = 'bechara', n, utility, updating,
                         temperature, pars, scale = .01,
                         fullOutput = FALSE) {
 
-    if (is.character(deck)) {
-        deckPath <- system.file(paste0('extdata/decks/deck_', deck, '.rds'), package = "iowa")
-        deck <- readRDS(deckPath)
-    }
+    if (is.character(deck))
+        deck <- importDeck(deck)
 
     # Output
     if (fullOutput){
