@@ -6,6 +6,8 @@
 *.so
 *.Rdata
 *.RData
+*.cc
+*.h
 
 # temporary files
 *~
