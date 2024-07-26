@@ -33,9 +33,8 @@
 #' "updating", or "temperature" are missing, default bounds will be selected for
 #' all parameters.
 #'
-#' The user may pass optional arguments to rstan::sampling(). In the absence of
-#' such arguments, the function uses the defaults, which at the time of writing
-#' specify four chains of 2000 samples for full posterior sampling.
+#' The user may pass optional arguments to rstan::sampling() or rstan::optimizing().
+#' In the absence of such arguments, the function uses the defaults.
 #'
 #' @return Nothing. Generates an error message in the event of incorrect input.
 #' @importFrom rstan sampling optimizing extract
@@ -47,17 +46,43 @@ fitIGT <- function(choice, win, loss = NULL, numDecks,
                    returnStanfit = F, ...) {
 
     # Create Stan data object
-    stanData <- iowa:::createStanDataForFitting(win, loss, choice, numDecks, utility, updating,
+    stanData <- createStanDataForFitting(win, loss, choice, numDecks, utility, updating,
                                          temperature, pars, reg, scale)
+    parLabs <- c(paste0('Utility_', names(modelDetails$utility[[utility]])),
+                 paste0('Updating_', names(modelDetails$updating[[updating]])),
+                 paste0('Temperature_', names(modelDetails$temperature[[temperature]])))
 
     # Call Stan
     if (method == 'optimizing') {
+
         fit <- optimizing(stanmodels$fit_igt, data = stanData, ...)
+        parIdx <- which(!grepl('raw_', names(fit$par)))
+        p <- fit$par[parIdx]
+        names(p) <- parLabs
+        ret <- list('Parameters' = p, 'logPosterior' = fit$value, 'return_code' = fit$return_code)
+        if (returnStanfit)
+            ret$stanFit <- fit
+
     } else if (method == 'sampling') {
         fit <- sampling(stanmodels$fit_igt, data = stanData, ...)
+
+        # Posterior dataframe
+        s <- extract(fit)
+        parIdx <- which(!grepl('raw_', names(s)) & grepl('params', names(s)))
+        p <- as.data.frame(do.call(cbind, s[parIdx]))
+        names(p) <- parLabs
+
+        # Diagnostics
+        s <- summary(fit)$summary
+        parIdx <- which(!grepl('raw_', rownames(s)) & grepl('params', rownames(s)))
+        s <- s[parIdx,]
+        rownames(s) <- parLabs
+        ret <- list('Samples' = p, 'Summary' = s)
+        if (returnStanfit)
+            ret$stanFit <- fit
     } else {
         stop('Unrecognized method')
     }
 
-    return(fit)
+    return(ret)
 }
