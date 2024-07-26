@@ -17,9 +17,9 @@
 
 setStanParamsForSimulation <- function(utility, updating, temperature, pars){
 
-    names_utility     <- modelComponentDetails$utility[[utility]]$par_names
-    names_updating    <- modelComponentDetails$updating[[updating]]$par_names
-    names_temperature <- modelComponentDetails$temperature[[temperature]]$par_names
+    names_utility     <- names(modelDetails$utility[[utility]])
+    names_updating    <- names(modelDetails$updating[[updating]])
+    names_temperature <- names(modelDetails$temperature[[temperature]])
 
     list(list(
          utility_params = array(unlist(pars$utility[names_utility])),

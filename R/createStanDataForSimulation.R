@@ -26,9 +26,9 @@ createStanDataForSimulation <- function(decks, utility, updating,
 
     # Setup stan data
     stanData <- list(NUM_TRIALS = numTrials, NUM_DECKS = numDecks,
-                      UTILITY_FUNCTION     = which(utility == names(modelComponentDetails$utility)),
-                      UPDATING_FUNCTION    = which(updating == names(modelComponentDetails$updating)),
-                      TEMPERATURE_FUNCTION = which(temperature == names(modelComponentDetails$temperature)),
+                      UTILITY_FUNCTION     = which(utility == names(modelDetails$utility)),
+                      UPDATING_FUNCTION    = which(updating == names(modelDetails$updating)),
+                      TEMPERATURE_FUNCTION = which(temperature == names(modelDetails$temperature)),
                       NUM_UTILITY_PARAMETERS     = length(pars$utility),
                       NUM_UPDATING_PARAMETERS    = length(pars$updating),
                       NUM_TEMPERATURE_PARAMETERS = length(pars$temperature),

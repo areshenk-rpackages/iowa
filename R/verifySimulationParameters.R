@@ -26,79 +26,60 @@ verifySimulationParameters <- function(utility, updating, temperature, pars){
         stop('Unrecognized temperature function')
     }
 
-    # Get number of parameters
+    # Get number of parameters, and check that the correct number has been provided
     nparam_utility <- length(modelDetails$utility[[utility]])
-    nparam_updating <- modelDetails$updating[[updating]]$num_params
-    nparam_temperature <- modelDetails$temperature[[temperature]]$num_params
+    if (nparam_utility != length(pars$utility))
+        stop('Utility has incorrect number of parameters')
 
-    # Get parameter names
-    names_utility     <- modelDetails$utility[[utility]]$par_names
-    names_updating    <- modelDetails$updating[[updating]]$par_names
-    names_temperature <- modelDetails$temperature[[temperature]]$par_names
+    nparam_updating <- length(modelDetails$updating[[updating]])
+    if (nparam_updating != length(pars$updating))
+        stop('Updating has incorrect number of parameters')
 
-    # Get bounds
-    lbound_utility <- modelDetails$utility[[utility]]$lower
-    ubound_utility <- modelDetails$utility[[utility]]$upper
+    nparam_temperature <- length(modelDetails$temperature[[temperature]])
+    if (nparam_temperature != length(pars$temperature))
+        stop('Temperature has incorrect number of parameters')
 
-    lbound_updating <- modelDetails$updating[[updating]]$lower
-    ubound_updating <- modelDetails$updating[[updating]]$upper
+    # Get parameter names and check that names are correct
+    names_utility     <- names(modelDetails$utility[[utility]])
+    if (!setequal(names(pars$utility), names_utility))
+        stop('Incorrect utility parameter names')
 
-    lbound_temperature <- modelDetails$temperature[[temperature]]$lower
-    ubound_temperature <- modelDetails$temperature[[temperature]]$upper
+    names_updating    <- names(modelDetails$updating[[updating]])
+    if (!setequal(names(pars$updating), names_updating))
+        stop('Incorrect updating parameter names')
 
-    # Verify number of parameters
-    if (length(pars$utility) != nparam_utility){
-        stop(paste(utility, 'utility function requires', nparam_utility, 'parameter(s).'))
-    } else if (length(pars$updating) != nparam_updating){
-        stop(paste(updating, 'updating function requires', nparam_updating, 'parameter(s).'))
-    } else if (length(pars$temperature) != nparam_temperature){
-        stop(paste(temperature, 'temperature function requires', nparam_temperature, 'parameter(s).'))
-    }
+    names_temperature <- names(modelDetails$temperature[[temperature]])
+    if (!setequal(names(pars$temperature), names_temperature))
+        stop('Incorrect temperature parameter names')
 
-    # Verify parameter names
-    if (any(!names(pars$utility) %in% names_utility)){
-        stop(paste(utility, 'utility function requires parameter(s):', names_utility))
-    } else if (any(!names(pars$updating) %in% names_updating)){
-        stop(paste(updating, 'updating function requires parameter(s):', names_updating))
-    } else if (any(!names(pars$temperature) %in% names_temperature)){
-        stop(paste(temperature, 'temperature function requires parameter(s):', names_temperature))
-    }
+    # Check that all arguments are present, and that all are scalars
+    parUnlist <- unlist(pars, recursive = T)
+    if (any(sapply(parUnlist, function(i) length(i) > 1 | !is.numeric(i))))
+        stop('Parameter values must be a single scalar')
 
-    # Verify lower bounds
-    utility_bounds <- unlist(pars$utility[names_utility]) < lbound_utility
-    utility_bounds[is.na(utility_bounds)] <- FALSE
-    if (any(utility_bounds)){
-        stop(paste('One or more utility parameters lies below the lower bound.'))
-    }
+    # Check that parameters respect bounds
+    utilityBoundViolation <- sapply(names_utility, function(n) {
+        p <- pars$utility[[n]]
+        p < modelDetails$utility[[utility]][[n]]$bounds[1] |
+            p > modelDetails$utility[[utility]][[n]]$bounds[2]
+    })
+    if (any(utilityBoundViolation))
+        stop('One or more utility parameters exceeds a required bound')
 
-    updating_bounds <- unlist(pars$updating[names_updating]) < lbound_updating
-    updating_bounds[is.na(updating_bounds)] <- FALSE
-    if (any(updating_bounds)){
-        stop(paste('One or more updating parameters lies below the lower bound.'))
-    }
+    updatingBoundViolation <- sapply(names_updating, function(n) {
+        p <- pars$updating[[n]]
+        p < modelDetails$updating[[updating]][[n]]$bounds[1] |
+            p > modelDetails$updating[[updating]][[n]]$bounds[2]
+    })
+    if (any(updatingBoundViolation))
+        stop('One or more updating parameters exceeds a required bound')
 
-    temperature_bounds <- unlist(pars$temperature[names_temperature]) < lbound_temperature
-    temperature_bounds[is.na(temperature_bounds)] <- FALSE
-    if (any(temperature_bounds)){
-        stop(paste('One or more temperature parameters lies below the lower bound.'))
-    }
+    temperatureBoundViolation <- sapply(names_temperature, function(n) {
+        p <- pars$temperature[[n]]
+        p < modelDetails$temperature[[temperature]][[n]]$bounds[1] |
+            p > modelDetails$temperature[[temperature]][[n]]$bounds[2]
+    })
+    if (any(temperatureBoundViolation))
+        stop('One or more temperature parameters exceeds a required bound')
 
-    # Verify upper bounds
-    utility_bounds <- unlist(pars$utility[names_utility]) > ubound_utility
-    utility_bounds[is.na(utility_bounds)] <- FALSE
-    if (any(utility_bounds)){
-        stop(paste('One or more utility parameters lies above the upper bound.'))
-    }
-
-    updating_bounds <- unlist(pars$updating[names_updating]) > ubound_updating
-    updating_bounds[is.na(updating_bounds)] <- FALSE
-    if (any(updating_bounds)){
-        stop(paste('One or more updating parameters lies above the upper bound.'))
-    }
-
-    temperature_bounds <- unlist(pars$temperature[names_temperature]) > ubound_temperature
-    temperature_bounds[is.na(temperature_bounds)] <- FALSE
-    if (any(temperature_bounds)){
-        stop(paste('One or more temperature parameters lies above the upper bound.'))
-    }
 }
