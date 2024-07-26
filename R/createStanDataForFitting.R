@@ -37,7 +37,7 @@ createStanDataForFitting <- function(win, loss = NULL, choice, numDecks, utility
     if (length(unique((c(length(win), length(loss), length(choice))))) != 1)
         stop('win, loss, and choice must be vectors of identical length')
 
-    pars <- verifyFittingBounds(pars)
+    pars <- verifyFittingBounds(utility, updating, temperature, pars)
 
     # Setup stan data
     stanData <- list(NUM_TRIALS = length(win),
@@ -51,18 +51,18 @@ createStanDataForFitting <- function(win, loss = NULL, choice, numDecks, utility
                      NUM_UPDATING_PARAMETERS    = length(pars$updating),
                      NUM_TEMPERATURE_PARAMETERS = length(pars$temperature),
 
-                     UTILITY_LOWER_BOUND = sapply(pars$utility, function(i) i[1]),
-                     UTILITY_UPPER_BOUND = sapply(pars$utility, function(i) i[2]),
+                     UTILITY_LOWER_BOUND = as.array(sapply(pars$utility, function(i) i[1])),
+                     UTILITY_UPPER_BOUND = as.array(sapply(pars$utility, function(i) i[2])),
 
-                     UPDATING_LOWER_BOUND = sapply(pars$updating, function(i) i[1]),
-                     UPDATING_UPPER_BOUND = sapply(pars$updating, function(i) i[2]),
+                     UPDATING_LOWER_BOUND = as.array(sapply(pars$updating, function(i) i[1])),
+                     UPDATING_UPPER_BOUND = as.array(sapply(pars$updating, function(i) i[2])),
 
-                     TEMPERATURE_LOWER_BOUND = sapply(pars$temperature, function(i) i[1]),
-                     TEMPERATURE_UPPER_BOUND = sapply(pars$temperature, function(i) i[2]),
+                     TEMPERATURE_LOWER_BOUND = as.array(sapply(pars$temperature, function(i) i[1])),
+                     TEMPERATURE_UPPER_BOUND = as.array(sapply(pars$temperature, function(i) i[2])),
 
 
-                     win  = scale * deck$win,
-                     loss = scale * deck$loss,
+                     win  = scale * win,
+                     loss = scale * loss,
                      choice = choice,
                      reg = reg)
 

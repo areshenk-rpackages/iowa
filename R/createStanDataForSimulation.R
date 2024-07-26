@@ -14,7 +14,7 @@
 #' }
 #' @return A list of data for stan
 
-createStanDataForSimulation <- function(decks, utility, updating,
+createStanDataForSimulation <- function(deck, utility, updating,
                                         temperature, pars, scale){
 
     if (any(dim(deck$win) != dim(deck$loss)))

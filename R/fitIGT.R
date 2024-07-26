@@ -3,15 +3,15 @@
 #' Fit model to IGT data either by MLE/MAP, or full posterior sampling
 #'
 #' @param win Vector of wins. If only net outcomes are observed, they should be provided here.
-#' @param loss Vector of losses. May be ommited if only net outcomes are observed.
+#' @param loss Vector of losses. May be omitted if only net outcomes are observed.
 #' @param choice Integer vector of deck choices
 #' @param numDecks Integer. Number of decks
 #' @param utility Name of utility function
 #' @param updating Name of updating function
 #' @param temperature Name of temperature function
 #' @param pars A named list of parameters. See details.
-#' @param scale Scaling factor for observed outcomes. Typically, outcomes are divided
-#' by 100, corresponding to scale = .01
+#' @param scale Scaling factor for observed outcomes. Typically, outcomes are
+#' divided by 100, corresponding to scale = .01
 #' @param reg Positive regularization parameter. A Beta(reg,reg) prior is placed
 #' over the range of each parameter, with larger values of reg giving a tighter
 #' concentration around the midpoint of the interval. Default value of 1 gives
@@ -43,11 +43,11 @@
 
 fitIGT <- function(choice, win, loss = NULL, numDecks,
                    utility, updating, temperature,
-                   pars, scale = .01, reg = 1, method = 'optimizing',
+                   pars = NULL, scale = .01, reg = 1, method = 'optimizing',
                    returnStanfit = F, ...) {
 
     # Create Stan data object
-    stanData <- createStanDataForFitting(win, loss, choice, numDecks, utility, updating,
+    stanData <- iowa:::createStanDataForFitting(win, loss, choice, numDecks, utility, updating,
                                          temperature, pars, reg, scale)
 
     # Call Stan

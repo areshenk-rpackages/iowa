@@ -26,8 +26,7 @@
 #' @export
 
 simulateIGT <- function(deck = 'bechara', n, utility, updating,
-                        temperature, pars, scale = .01,
-                        fullOutput = FALSE) {
+                        temperature, pars, scale = .01, fullOutput = FALSE) {
 
     if (is.character(deck))
         deck <- importDeck(deck)
@@ -43,7 +42,7 @@ simulateIGT <- function(deck = 'bechara', n, utility, updating,
     verifySimulationParameters(utility, updating, temperature, pars)
 
     # Create Stan data object
-    stanData <- createStanDataForSimulation(object, utility, updating, temperature, pars, scale)
+    stanData <- createStanDataForSimulation(deck, utility, updating, temperature, pars, scale)
 
     # Set parameter values
     paramValues <- setStanParamsForSimulation(utility, updating, temperature, pars)
