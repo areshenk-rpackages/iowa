@@ -1,0 +1,17 @@
+pandoc: 3.1.1
+pkgdown: 2.0.9
+pkgdown_sha: ~
+articles:
+  customizing_decks: customizing_decks.html
+  customizing_models: customizing_models.html
+  deck_structure: deck_structure.html
+  model_structure: model_structure.html
+  simulation_guide: simulation_guide.html
+  temperature_functions: temperature_functions.html
+  updating_functions: updating_functions.html
+  utility_functions: utility_functions.html
+last_built: 2024-07-28T00:25Z
+urls:
+  reference: areshenk-rpackages.github.io/iowa/reference
+  article: areshenk-rpackages.github.io/iowa/articles
+
