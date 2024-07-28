@@ -4,11 +4,9 @@
 \alias{createStanDataForSimulation}
 \title{Create list of data for Stan simulation}
 \usage{
-createStanDataForSimulation(decks, utility, updating, temperature, pars, scale)
+createStanDataForSimulation(deck, utility, updating, temperature, pars, scale)
 }
 \arguments{
-\item{decks}{Names list with entries "win" and "loss"}
-
 \item{utility}{Name of utility function}
 
 \item{updating}{Name of updating function}
@@ -16,6 +14,8 @@ createStanDataForSimulation(decks, utility, updating, temperature, pars, scale)
 \item{temperature}{Name of temperature function}
 
 \item{pars}{A named list of parameters. See details.}
+
+\item{decks}{Names list with entries "win" and "loss"}
 }
 \value{
 A list of data for stan

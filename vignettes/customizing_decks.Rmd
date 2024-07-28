@@ -1,0 +1,33 @@
+---
+title: "Adding new decks"
+author: "Corson N. Areshenkoff"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Adding new decks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Decks are stored as `.rds` files in `inst/extdata/decks`; all with the 
+standard naming format `deck_KEYWORD.rds`. Internally, when a deck is identified
+by name (e.g. `bechara`), iowa searches for the filename using
+
+```{r,eval=FALSE}
+system.file(paste0('extdata/decks/deck_', deck, '.rds'), package = "iowa")
+```
+
+And so as long as the deck is given a unique identifier, is named appropriately,
+and is placed in the appropriate directory, it should be available to all
+functions within the package (e.g. `simulateIGT()`) when the package is recompiled.
+
+Note that this may be convenient if an alternative deck structure is used frequently,
+but all relevant functions also accept custom deck structures as list objects 
+(see the relevant article).

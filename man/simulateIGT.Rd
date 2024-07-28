@@ -33,7 +33,7 @@ are divided by 100 (i.e. scale = .01).}
 \item{fullOutput}{Whether to output internal state variables (i.e. deck valuations)}
 }
 \value{
-Nothing. Generates an error message in the event of incorrect input.
+A named list containing simulated IGT data.
 }
 \description{
 Simulate IGT performance using a specified model.

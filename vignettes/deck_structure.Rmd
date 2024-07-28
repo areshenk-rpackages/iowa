@@ -1,0 +1,60 @@
+---
+title: "Deck structure"
+author: "Corson N. Areshenkoff"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deck structure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(iowa)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A *deck structure* -- for the purposes of the **iowa** package -- is a named list of matrices,
+containing the gains and losses for each deck. The list contains two fields: `win`
+and `loss`, each of which is an $n \times k$ matrix or data frame, where each column
+is a deck, and each row is a trial. In cases where the task produces only a net outcome,
+this should be stored in the `win` slot, and the `loss` slot should be set to a
+matrix of zeros. In cases where both a gain and a loss are presented, losses
+stored in `loss` should be stored as positive values, as these values are *subtracted*
+internally when computing net outcomes.
+
+**iowa** includes several common deck structures, which can be loaded directly
+using the `importDeck()` function, or can be identified by keyword in other package
+functions. The following decks are included by default:
+
+- `bechara`: The classic deck structure introduced by Bechara et al. (1994). In
+the original publication, each deck contains only 40 cards. Here, the decks
+contain 100 cards, consisting of 2.5 copies of the original decks. Two decks 
+(A and B) have negative expected value, while the remaining (C and D) have 
+positive expected value. Further, decks B and D have a high reward frequency,
+with relatively infrequent losses.
+- `becharavar`: A variant of `bechara` in which the losses of deck C are fixed
+at 50, whereas the original losses vary between 25, 50, and 75.
+- `soochow`: An alternative deck structure used by Lin et al. (2009) which
+balances the gain/loss frequencies of pairs of good/bad decks.
+
+Any of these decks can be loaded by passing the deck name to `importDeck()`, e.g.
+
+```{r}
+deck <- importDeck('bechara')
+print(head(deck$loss))
+```
+
+Further, in functions accepting deck input (such as `simulateIGT()`), users can
+identify any of these decks by name, in addition to the option of providing
+a list containing a custom deck.
+
+### References
+
+Bechara, A., Damasio, A. R., Damasio, H., & Anderson, S. W. (1994). Insensitivity to future consequences following damage to human prefrontal cortex. Cognition, 50(1-3), 7-15.
+
+Lin, C. H., Chiu, Y. C., & Huang, J. T. (2009). Gain-loss frequency and final outcome in the Soochow Gambling Task: A reassessment. Behavioral and Brain Functions, 5, 1-9.
+

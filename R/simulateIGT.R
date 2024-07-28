@@ -21,7 +21,7 @@
 #'
 #' @seealso [importDeck()] for available deck structures, and more information
 #' about the structure of a deck object
-#' @return Nothing. Generates an error message in the event of incorrect input.
+#' @return A named list containing simulated IGT data.
 #' @importFrom rstan sampling extract
 #' @export
 

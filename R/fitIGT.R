@@ -36,7 +36,7 @@
 #' The user may pass optional arguments to rstan::sampling() or rstan::optimizing().
 #' In the absence of such arguments, the function uses the defaults.
 #'
-#' @return Nothing. Generates an error message in the event of incorrect input.
+#' @return A list containing either estimated, or full posterior samples for all parameters.
 #' @importFrom rstan sampling optimizing extract
 #' @export
 

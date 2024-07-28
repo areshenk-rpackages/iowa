@@ -1,0 +1,85 @@
+---
+title: "Simulating IGT data"
+author: "Corson N. Areshenkoff"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulating IGT data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(iowa)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Simulation of IGT performance is handled by the function `simulateIGT()`, which
+provides a simple interface to the underlying model code (which is handled by RStan
+on the backend).
+
+The essential ingredients include a *deck structure* (which may be a custom deck
+structure, or one of the decks included in **iowa**), and the specification of
+the utility, updating, and temperature functions used by the model. As an example,
+we can replicate part of a simulation reported by Steingroever et al. (2013), in
+which the PVL-delta model was used to characterize patterns of deck preferences
+in various regions of parameter space.
+
+The authors use the standard deck structure, introduced by Bechara et al. (1994),
+and a standard 100 trial implementation of the task. Prior to model fitting/simulation,
+all outcomes are scaled by 100, as is standard in the literature. The deck structure
+can be created manually, but **iowa** includes the Bechara deck structure by default
+under the keyword `bechara`.
+
+The PVL-delta model itself is comprised of the prospect utility function, the 
+delta learning rule, and a softmax choice rule with trial-independent temperature 
+(see the respective articles for available utility, updating, and temperature functions).
+In **iowa**, these components are identified the utility keyword `PU`, the updating
+keyword `DEL`, and the temperature keyword `TIC`.
+
+The model parameters are specified by a list `pars`, which contains named fields
+for the parameters of each model component. In our case, the components we have
+selected have the following parameters:
+
+```{r, echo=F, results='asis'}
+d <- data.frame('Component' = c('utility', 'updating', 'temperature'),
+                'Keyword' = c('PU', 'DEL', 'TIC'),
+                'Parameters' = c('(A,L)', 'r', 'c'))
+knitr::kable(d, caption = 'Model parameters')
+```
+
+And so we construct our list as follows (where the specific parameter values
+can be set to whatever the user likes):
+
+```{r}
+pars <- list('utility' = list('A' = .5, 'L' = 2),
+             'updating' = list('r' = .75),
+             'temperature' = list('c' = 3))
+```
+
+We can then simulate `n` subject by calling `simulateIGT()` as follows:
+
+```{r,results='hide'}
+simData <- simulateIGT(deck = 'bechara', n = 10, utility = 'PU',
+                       updating = 'DEL', temperature = 'TIC', pars = pars, 
+                       scale = .01, fullOutput = FALSE)
+```
+
+```{r}
+str(simData, max.level = 1)
+```
+
+Note that `scale = .01` specifies that deck outcomes should be premultiplied by
+`.01` prior to being fed into the model, in order to agree with the authors' scaling
+of the decks by 100. The argument `fullOutput = FALSE` specifies that `simulateIGT()`
+should return only deck choices and outcomes, while `TRUE` also returns internal
+state variables, such as the valuation of each deck on each trial.
+
+### References
+
+Bechara, A., Damasio, A. R., Damasio, H., & Anderson, S. W. (1994). Insensitivity to future consequences following damage to human prefrontal cortex. Cognition, 50(1-3), 7-15.
+
+Steingroever, H., Wetzels, R., & Wagenmakers, E. J. (2013). Validating the PVL-Delta model for the Iowa gambling task. Frontiers in psychology, 4, 898.

@@ -34,7 +34,7 @@ Included decks are identified by a character string:
   \item bechara: The standard deck structure used by Bechara et al. (1994).
   Note that the authors used decks of 40 cards, while the decks provided here
   contains 100 cards, consisting of 2.5 "copies" of each deck.
-  \item becharavar: A variance of the Bechara deck structure in which the loss of
+  \item becharavar: A variant of the Bechara deck structure in which the loss of
   deck C is fixed at 50, rather than varying between (25, 50, 75).
   \item soochow: The alternative deck structure used by Chiu et al. (2008) in
   which the win/loss frequency is symmetric across pairs of good and bad decks.

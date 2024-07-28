@@ -12,7 +12,7 @@ fitIGT(
   utility,
   updating,
   temperature,
-  pars,
+  pars = NULL,
   scale = 0.01,
   reg = 1,
   method = "optimizing",
@@ -37,8 +37,8 @@ fitIGT(
 
 \item{pars}{A named list of parameters. See details.}
 
-\item{scale}{Scaling factor for observed outcomes. Typically, outcomes are divided
-by 100, corresponding to scale = .01}
+\item{scale}{Scaling factor for observed outcomes. Typically, outcomes are
+divided by 100, corresponding to scale = .01}
 
 \item{reg}{Positive regularization parameter. A Beta(reg,reg) prior is placed
 over the range of each parameter, with larger values of reg giving a tighter
@@ -53,7 +53,7 @@ for full posterior sampling via Stan's No-U-Turn-Sampler (NUTS).}
 \item{...}{Optional arguments provided to rstan::sampling()}
 }
 \value{
-Nothing. Generates an error message in the event of incorrect input.
+A list containing either estimated, or full posterior samples for all parameters.
 }
 \description{
 Fit model to IGT data either by MLE/MAP, or full posterior sampling
@@ -72,7 +72,6 @@ will be selected based on conventions in the literature. If any of "utility",
 "updating", or "temperature" are missing, default bounds will be selected for
 all parameters.
 
-The user may pass optional arguments to rstan::sampling(). In the absence of
-such arguments, the function uses the defaults, which at the time of writing
-specify four chains of 2000 samples for full posterior sampling.
+The user may pass optional arguments to rstan::sampling() or rstan::optimizing().
+In the absence of such arguments, the function uses the defaults.
 }

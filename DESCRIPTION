@@ -1,6 +1,6 @@
 Package: iowa
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Modular reinforcement learning models of the Iowa gambling task
 Version: 0.1.0
 Author: Corson N. Areshenkoff
 Maintainer: Corson N. Areshenkoff <areshenk@protonmail.com>
@@ -28,3 +28,4 @@ LinkingTo:
     rstan (>= 2.18.1),
     StanHeaders (>= 2.18.0)
 SystemRequirements: GNU make
+URL: https://areshenk-rpackages.github.io/iowa/
