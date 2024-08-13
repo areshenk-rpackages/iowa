@@ -9,7 +9,7 @@ template:
 home:
   title: Modular reinforcement learning models of the IGT
   description: |
-    iowa contains cmdstan implementations of modular reinforcement learning models of the Iowa gambling task.
+    iowa implements modular reinforcement learning models of the Iowa gambling task.
   strip_header: no
 authors:
   Corson N. Areshenkoff:
@@ -23,10 +23,10 @@ articles:
   - utility_functions
   - updating_functions
   - temperature_functions
+  - deck_structure
 - title: Adding to iowa
   navbar: Adding to iowa
-  contents: customizing_models
-reference:
-- title: Package
-  contents: '`iowa-package`'
+  contents: 
+  - customizing_models
+  - customizing_decks
 
