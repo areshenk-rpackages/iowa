@@ -1,9 +1,8 @@
 # iowa <img src='man/figures/logo.png' align="right" height="138.5" />
 
-The **iowa** package implements modular
-reinforcement learning models of the Iowa gambling task. Model components are
-implemented in Stan, and are compiled into cmdstan models which are then made
-available internally to other packages.
+The **iowa** package implements modular reinforcement learning models of the Iowa 
+gambling task. Model components are implemented in Stan, and are precompiled by
+cmdstan.
 
 The package implements the simulation and fitting of models constructed by
 mixing and matching various utility, updating, and temperature functions; and is
