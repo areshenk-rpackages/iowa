@@ -5,9 +5,9 @@
 \title{Create list of data for Stan fitting}
 \usage{
 createStanDataForFitting(
-  win,
-  loss = NULL,
-  choice,
+  wins,
+  losses = NULL,
+  choices,
   numDecks,
   utility,
   updating,
@@ -18,11 +18,11 @@ createStanDataForFitting(
 )
 }
 \arguments{
-\item{win}{Vector or wins}
+\item{wins}{Vector or wins}
 
-\item{loss}{Vector of losses}
+\item{losses}{Vector of losses}
 
-\item{choice}{Integer vector of deck choices}
+\item{choices}{Integer vector of deck choices}
 
 \item{numDecks}{Integer. Number of decks}
 

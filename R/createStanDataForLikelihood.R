@@ -1,6 +1,5 @@
-#' Create list of data for Stan simulation
+#' Create list of data for Stan likelihood computation
 #'
-#' @param decks Names list with entries "wins" and "losses"
 #' @param utility Name of utility function
 #' @param updating Name of updating function
 #' @param temperature Name of temperature function
@@ -14,25 +13,18 @@
 #' }
 #' @return A list of data for stan
 
-createStanDataForSimulation <- function(deck, utility, updating,
-                                        temperature, pars, scale){
-
-    if (any(dim(deck$wins) != dim(deck$losses)))
-        stop('Deck wins and losses must have the same dimensions.')
-
-    # Get IGT parameters
-    numTrials <- nrow(deck$wins)
-    numDecks  <- ncol(deck$wins)
-
+createStanDataForLikelihood <- function(wins, losses, choices, numDecks, utility, 
+                                        updating, temperature, scale){
+    
     # Setup stan data
-    stanData <- list(NUM_TRIALS = numTrials, NUM_DECKS = numDecks,
+    stanData <- list(NUM_TRIALS = length(wins), NUM_DECKS = numDecks,
                      UTILITY_FUNCTION     = modelDetails$utility[[utility]]$index,
                      UPDATING_FUNCTION    = modelDetails$updating[[updating]]$index,
                      TEMPERATURE_FUNCTION = modelDetails$temperature[[temperature]]$index,
                      NUM_UTILITY_PARAMETERS     = length(modelDetails$utility[[utility]]$pars),
                      NUM_UPDATING_PARAMETERS    = length(modelDetails$updating[[updating]]$pars),
                      NUM_TEMPERATURE_PARAMETERS = length(modelDetails$temperature[[temperature]]$pars),
-                     wins  = scale * deck$wins, losses = scale * deck$losses)
-
+                     wins  = scale * wins, losses = scale * losses, choices = choices)
+    
     return(stanData)
 }

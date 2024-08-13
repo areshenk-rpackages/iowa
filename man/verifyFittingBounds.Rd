@@ -4,7 +4,7 @@
 \alias{verifyFittingBounds}
 \title{Verify provided fitting bounds}
 \usage{
-verifyFittingBounds(utility, updating, temperature, pars)
+verifyFittingBounds(utility, updating, temperature, pars = NULL)
 }
 \arguments{
 \item{utility}{Name of utility function}

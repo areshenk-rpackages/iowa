@@ -16,7 +16,7 @@ setStanParamsForSimulation(utility, updating, temperature, pars)
 \item{pars}{A named list of parameters. See details.}
 }
 \value{
-A list for Stan.
+A draws_array object for stan
 }
 \description{
 Internal function.

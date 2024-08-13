@@ -1,8 +1,8 @@
 #' Create list of data for Stan fitting
 #'
-#' @param win Vector or wins
-#' @param loss Vector of losses
-#' @param choice Integer vector of deck choices
+#' @param wins Vector or wins
+#' @param losses Vector of losses
+#' @param choices Integer vector of deck choices
 #' @param numDecks Integer. Number of decks
 #' @param utility Name of utility function
 #' @param updating Name of updating function
@@ -23,7 +23,7 @@
 #' }
 #' @return A list of data for stan
 
-createStanDataForFitting <- function(win, loss = NULL, choice, numDecks, utility, updating,
+createStanDataForFitting <- function(wins, losses = NULL, choices, numDecks, utility, updating,
                                      temperature, pars = NULL, reg = 1, scale = .01){
 
     if (reg < 0)
@@ -31,21 +31,19 @@ createStanDataForFitting <- function(win, loss = NULL, choice, numDecks, utility
     else if (reg < 1)
         warning("Prior regularization can technically be less than 1, but you probably don't want this.")
 
-    if (is.null(loss))
-        loss <- 0 * win
+    if (is.null(losses))
+        losses <- 0 * wins
 
-    if (length(unique((c(length(win), length(loss), length(choice))))) != 1)
-        stop('win, loss, and choice must be vectors of identical length')
-
-    pars <- verifyFittingBounds(utility, updating, temperature, pars)
+    if (length(unique((c(length(wins), length(losses), length(choices))))) != 1)
+        stop('wins, losses, and choices must be vectors of identical length')
 
     # Setup stan data
-    stanData <- list(NUM_TRIALS = length(win),
+    stanData <- list(NUM_TRIALS = length(wins),
                      NUM_DECKS = numDecks,
 
-                     UTILITY_FUNCTION     = which(utility == names(modelDetails$utility)),
-                     UPDATING_FUNCTION    = which(updating == names(modelDetails$updating)),
-                     TEMPERATURE_FUNCTION = which(temperature == names(modelDetails$temperature)),
+                     UTILITY_FUNCTION     = modelDetails$utility[[utility]]$index,
+                     UPDATING_FUNCTION    = modelDetails$updating[[updating]]$index,
+                     TEMPERATURE_FUNCTION = modelDetails$temperature[[temperature]]$index,
 
                      NUM_UTILITY_PARAMETERS     = length(pars$utility),
                      NUM_UPDATING_PARAMETERS    = length(pars$updating),
@@ -61,9 +59,9 @@ createStanDataForFitting <- function(win, loss = NULL, choice, numDecks, utility
                      TEMPERATURE_UPPER_BOUND = as.array(sapply(pars$temperature, function(i) i[2])),
 
 
-                     win  = scale * win,
-                     loss = scale * loss,
-                     choice = choice,
+                     wins  = scale * wins,
+                     losses = scale * losses,
+                     choices = choices,
                      reg = reg)
 
     return(stanData)

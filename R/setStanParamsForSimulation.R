@@ -13,17 +13,33 @@
 #'  \item{"updating": }{See above.}
 #'  \item{"temperature": }{See above.}
 #' }
-#' @return A list for Stan.
+#' @importFrom posterior as_draws_array
+#' @return A draws_array object for stan
 
 setStanParamsForSimulation <- function(utility, updating, temperature, pars){
 
-    names_utility     <- names(modelDetails$utility[[utility]])
-    names_updating    <- names(modelDetails$updating[[updating]])
-    names_temperature <- names(modelDetails$temperature[[temperature]])
+    names_utility     <- names(modelDetails$utility[[utility]]$pars)
+    names_updating    <- names(modelDetails$updating[[updating]]$pars)
+    names_temperature <- names(modelDetails$temperature[[temperature]]$pars)
 
-    list(list(
-         utility_params = array(unlist(pars$utility[names_utility])),
-         updating_params = array(unlist(pars$updating[names_updating])),
-         temperature_params = array(unlist(pars$temperature[names_temperature]))))
+    # Create parameter names for stan program
+    parnames <- c(paste0('utility_params[',     1:length(names_utility), ']'),
+                  paste0('updating_params[',    1:length(names_updating), ']'),
+                  paste0('temperature_params[', 1:length(names_temperature), ']'))
+
+    # Make sure parameters are provided in correct order
+    pars <- list('utility' = pars$utility[names_utility],
+                 'updating' = pars$updating[names_updating],
+                 'temperature' = pars$temperature[names_temperature])
+    parlists <- unlist(pars, recursive = F)
+    names(parlists) <- parnames
+    numpars <- sapply(parlists, length)
+
+    if (length(unique(numpars)) != 1)
+        stop('Parameter vectors must have equal length')
+
+    arr <- as_draws_array(parlists)
+
+    return(arr)
 
 }

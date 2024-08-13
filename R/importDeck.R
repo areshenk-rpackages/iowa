@@ -7,15 +7,15 @@
 #' for the user to construct their own. All decks are named lists with fields:
 #'
 #' \itemize{
-#'   \item win: A numTrial x numDeck matrix of gains
-#'   \item loss: A numTrial x numDeck matrix of losses
+#'   \item wins: A numTrial x numDeck matrix of gains
+#'   \item losses: A numTrial x numDeck matrix of losses
 #' }
 #'
 #' Recall that, in the classic administration of the IGT, subjects experience
 #' both a gain and a loss when selecting a card. In cases where the subject sees
 #' only a net outcome (e.g. as in the prospect utility function), the net gain is
-#' computed internal as win - loss, and so the user can simply place the net outcome
-#' in the "win" slot, and specify the "loss" slot to be a matrix of zeros.
+#' computed internal as wins - losses, and so the user can simply place the net outcome
+#' in the "wins" slot, and specify the "losses" slot to be a matrix of zeros.
 #' Included decks are identified by a character string:
 #' \itemize{
 #'   \item bechara: The standard deck structure used by Bechara et al. (1994).

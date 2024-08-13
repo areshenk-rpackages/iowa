@@ -2,9 +2,9 @@
 #'
 #' Fit model to IGT data either by MLE/MAP, or full posterior sampling
 #'
-#' @param win Vector of wins. If only net outcomes are observed, they should be provided here.
-#' @param loss Vector of losses. May be omitted if only net outcomes are observed.
-#' @param choice Integer vector of deck choices
+#' @param wins Vector of wins. If only net outcomes are observed, they should be provided here.
+#' @param losses Vector of losses. May be omitted if only net outcomes are observed.
+#' @param choices Integer vector of deck choices
 #' @param numDecks Integer. Number of decks
 #' @param utility Name of utility function
 #' @param updating Name of updating function
@@ -16,10 +16,10 @@
 #' over the range of each parameter, with larger values of reg giving a tighter
 #' concentration around the midpoint of the interval. Default value of 1 gives
 #' a uniform prior.
-#' @param method Either "optimization" for MAP (MLE when reg = 1), or "sampling"
+#' @param method Either "optimize" for MAP (MLE when reg = 1), or "sample"
 #' for full posterior sampling via Stan's No-U-Turn-Sampler (NUTS).
-#' @param returnStanfit Whether to return the full stanfit object.
-#' @param ... Optional arguments provided to rstan::sampling()
+#' @param returnStanobj Whether to return the full cmdstan object.
+#' @param ... Optional arguments provided to cmdstan::optimize() or cmdstan::sample()
 #' @details Argument "pars" is a named list with fields:
 #' \itemize{
 #'  \item{"utility": }{A named list of parameter values. Names must correspond to
@@ -37,49 +37,56 @@
 #' In the absence of such arguments, the function uses the defaults.
 #'
 #' @return A list containing either estimated, or full posterior samples for all parameters.
-#' @importFrom rstan sampling optimizing extract
+#' @importFrom posterior as_draws_df
 #' @export
 
-fitIGT <- function(choice, win, loss = NULL, numDecks,
+fitIGT <- function(choices, wins, losses = NULL, numDecks,
                    utility, updating, temperature,
-                   pars = NULL, scale = .01, reg = 1, method = 'optimizing',
-                   returnStanfit = F, ...) {
+                   pars = NULL, scale = .01, reg = 1, method = 'optimize',
+                   returnStanobj = F, ...) {
+
+    pars <- verifyFittingBounds(utility, updating, temperature, pars)
 
     # Create Stan data object
-    stanData <- createStanDataForFitting(win, loss, choice, numDecks, utility, updating,
+    stanData <- createStanDataForFitting(wins, losses, choices, numDecks, utility, updating,
                                          temperature, pars, reg, scale)
-    parLabs <- c(paste0('Utility_', names(modelDetails$utility[[utility]])),
-                 paste0('Updating_', names(modelDetails$updating[[updating]])),
-                 paste0('Temperature_', names(modelDetails$temperature[[temperature]])))
+    parLabs <- c(paste0('Utility_', names(modelDetails$utility[[utility]]$pars)),
+                 paste0('Updating_', names(modelDetails$updating[[updating]]$pars)),
+                 paste0('Temperature_', names(modelDetails$temperature[[temperature]]$pars)))
 
     # Call Stan
-    if (method == 'optimizing') {
+    model <- stan_package_model(name = "fit_igt", package = "iowa")
 
-        fit <- optimizing(stanmodels$fit_igt, data = stanData, ...)
-        parIdx <- which(!grepl('raw_', names(fit$par)))
-        p <- fit$par[parIdx]
+    if (method == 'optimize') {
+
+        fit <- model$optimize(data = stanData, ...)
+        est <- fit$mle()
+        parIdx <- which(!grepl('raw_', names(est)))
+        out <- fit$o
+        p <- est[parIdx]
         names(p) <- parLabs
-        ret <- list('Parameters' = p, 'logPosterior' = fit$value, 'return_code' = fit$return_code)
-        if (returnStanfit)
-            ret$stanFit <- fit
+        ret <- list('Parameters' = p, 'logPosterior' = fit$lp(), 'return_code' = fit$return_codes())
+        if (returnStanobj)
+            ret$stanobj <- fit
 
-    } else if (method == 'sampling') {
-        fit <- sampling(stanmodels$fit_igt, data = stanData, ...)
+    } else if (method == 'sample') {
+        fit <- model$sample(data = stanData, ...)
 
         # Posterior dataframe
-        s <- extract(fit)
+        s <- fit$draws()
+        s <- as_draws_df(s)
         parIdx <- which(!grepl('raw_', names(s)) & grepl('params', names(s)))
-        p <- as.data.frame(do.call(cbind, s[parIdx]))
+        p <- s[,parIdx]
         names(p) <- parLabs
 
         # Diagnostics
-        s <- summary(fit)$summary
-        parIdx <- which(!grepl('raw_', rownames(s)) & grepl('params', rownames(s)))
+        s <- fit$summary()
+        parIdx <- which(!grepl('raw_', s$variable) & grepl('params', s$variable))
         s <- s[parIdx,]
-        rownames(s) <- parLabs
+        s$variable <- parLabs
         ret <- list('Samples' = p, 'Summary' = s)
-        if (returnStanfit)
-            ret$stanFit <- fit
+        if (returnStanobj)
+            ret$stanobj <- fit
     } else {
         stop('Unrecognized method')
     }

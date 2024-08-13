@@ -5,9 +5,9 @@
 \title{Fit model to IGT data}
 \usage{
 fitIGT(
-  choice,
-  win,
-  loss = NULL,
+  choices,
+  wins,
+  losses = NULL,
   numDecks,
   utility,
   updating,
@@ -15,17 +15,17 @@ fitIGT(
   pars = NULL,
   scale = 0.01,
   reg = 1,
-  method = "optimizing",
-  returnStanfit = F,
+  method = "optimize",
+  returnStanobj = F,
   ...
 )
 }
 \arguments{
-\item{choice}{Integer vector of deck choices}
+\item{choices}{Integer vector of deck choices}
 
-\item{win}{Vector of wins. If only net outcomes are observed, they should be provided here.}
+\item{wins}{Vector of wins. If only net outcomes are observed, they should be provided here.}
 
-\item{loss}{Vector of losses. May be omitted if only net outcomes are observed.}
+\item{losses}{Vector of losses. May be omitted if only net outcomes are observed.}
 
 \item{numDecks}{Integer. Number of decks}
 
@@ -45,12 +45,12 @@ over the range of each parameter, with larger values of reg giving a tighter
 concentration around the midpoint of the interval. Default value of 1 gives
 a uniform prior.}
 
-\item{method}{Either "optimization" for MAP (MLE when reg = 1), or "sampling"
+\item{method}{Either "optimize" for MAP (MLE when reg = 1), or "sample"
 for full posterior sampling via Stan's No-U-Turn-Sampler (NUTS).}
 
-\item{returnStanfit}{Whether to return the full stanfit object.}
+\item{returnStanobj}{Whether to return the full cmdstan object.}
 
-\item{...}{Optional arguments provided to rstan::sampling()}
+\item{...}{Optional arguments provided to cmdstan::optimize() or cmdstan::sample()}
 }
 \value{
 A list containing either estimated, or full posterior samples for all parameters.
