@@ -28,7 +28,7 @@ simulateIGT <- function(deck = 'bechara', n, utility, updating,
                         temperature, pars, scale = .01) {
 
     if (is.character(deck))
-        deck <- iowamodels::importDeck(deck)
+        deck <- importDeck(deck)
 
     # Verify pars
     verifyStanParamsForSimulation(utility, updating, temperature, pars)
